@@ -1,0 +1,27 @@
+{
+  "name": "node-beauty-elasticsearch",
+  "version": "1.0.0",
+  "description": "Elasticsearch module for node-beauty",
+  "private": false,
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hdwong/node-beauty-elasticsearch.git"
+  },
+  "dependencies": {
+    "elasticsearch": "*"
+  },
+  "keywords": [
+    "node-beauty",
+    "elasticsearch"
+  ],
+  "author": "Bun Wong <bunwong@qq.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hdwong/node-beauty-elasticsearch/issues"
+  },
+  "homepage": "https://github.com/hdwong/node-beauty-elasticsearch#readme",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
