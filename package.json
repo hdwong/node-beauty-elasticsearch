@@ -1,6 +1,6 @@
 {
   "name": "node-beauty-elasticsearch",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Elasticsearch module for node-beauty",
   "private": false,
   "main": "index.js",

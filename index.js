@@ -27,6 +27,31 @@ let elasticsearch = {
     });
   },
   get_document: (req, res, next) => {
+    if (req.query.query === undefined) {
+      throw 'Params is wrong';
+    }
+    let index = req.query.index || config.name;
+    let type = req.query.type || 'default';
+    try {
+      let queryBody = {
+        index: index,
+        type: type,
+        body: JSON.parse(req.query.query),
+        fields: []
+      };
+      if (req.query.from !== undefined) {
+        queryBody.from = parseInt(req.query.from, 10);
+      }
+      if (req.query.size !== undefined) {
+        queryBody.size = parseInt(req.query.size, 10);
+      }
+      client.search(queryBody, (error, result) => {
+        elasticsearch.assert(error);
+        next(result);
+      });
+    } catch (error) {
+      elasticsearch.assert(error);
+    }
   },
   post_document: (req, res, next) => {
     if (!req.body || req.body.data === undefined) {
