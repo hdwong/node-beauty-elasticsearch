@@ -29,9 +29,10 @@ let elasticsearch = {
   get_document: (req, res, next) => {
   },
   post_document: (req, res, next) => {
-    if (!req.body || req.body.index === undefined || req.body.data === undefined) {
+    if (!req.body || req.body.data === undefined) {
       throw 'Params is wrong';
     }
+    let index = req.body && req.body.index ? req.body.index : config.name;
     let type = req.body && req.body.type ? req.body.type : 'default';
     try {
       let docs = JSON.parse(req.body.data);
@@ -45,7 +46,7 @@ let elasticsearch = {
           delete row.id;
           bulk.push({
             index: {
-              _index: req.body.index,
+              _index: index,
               _type: type,
               _id: id
             }
@@ -66,9 +67,10 @@ let elasticsearch = {
     }
   },
   delete_document: (req, res, next) => {
-    if (!req.body || req.body.index === undefined || req.body.data === undefined) {
+    if (!req.body || req.body.data === undefined) {
       throw 'Params is wrong';
     }
+    let index = req.body && req.body.index ? req.body.index : config.name;
     let type = req.body && req.body.type ? req.body.type : 'default';
     try {
       let docs = JSON.parse(req.body.data);
@@ -77,7 +79,7 @@ let elasticsearch = {
         core.forEach(docs, (id) => {
           bulk.push({
             delete: {
-              _index: req.body.index,
+              _index: index,
               _type: type,
               _id: id
             }
