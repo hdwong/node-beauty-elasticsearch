@@ -70,12 +70,15 @@ let elasticsearch = {
           let id = row.id;
           delete row.id;
           bulk.push({
-            index: {
+            update: {
               _index: index,
               _type: type,
               _id: id
             }
-          }, row);
+          }, {
+            doc: row,
+            doc_as_upsert: true
+          });
         }, () => {
           client.bulk({
             body: bulk
